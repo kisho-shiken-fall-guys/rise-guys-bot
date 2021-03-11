@@ -1,6 +1,7 @@
 # インストールした discord.py を読み込む
 import discord
 import random
+import os
 from quart import Quart, request
 
 quart = Quart(__name__)
@@ -9,15 +10,13 @@ quart = Quart(__name__)
 # 今後は動的にチャンネルを動的に取得する必要がある
 # よくあるのがherokuの環境変数に設定する方法らしい
 # セキュリティ上IDは削除
-CHANNEL_ID =   # 任意のチャンネルID(int)
+CHANNEL_ID = int(os.environ['CHANNEL_ID'])  # 任意のチャンネルID(int)
 # 接続に必要なオブジェクトを生成
 intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
 
 emoji = '\N{Face with Party Horn and Party Hat}'
-
-# 任意のチャンネルで挨拶する非同期関数を定義
 
 
 async def isuue_embed(title, description, login, issue_url, user_url,
@@ -27,7 +26,7 @@ async def isuue_embed(title, description, login, issue_url, user_url,
     embed = discord.Embed(
         title=title,
         description=description +
-        "\nやってくれるね？" +
+        "\n\nやってくれるね？" +
         random.choice(members).mention,
         url=issue_url)
     # ここ以降にフォーマットの改変を記載
@@ -141,7 +140,7 @@ async def on_message(message):
     if message.content == 'github リアクション':
         await message.channel.send('github リアクションつける')
 #         await message.add_reaction(emoji)
-# チャンネルIDをチェックするため 
+# チャンネルIDをチェックするため
     elif message.content == '/test':
         await message.channel.send('channelID:' + str(message.channel.id))
     # /randと発言したらサーバー内のメンバーから誰かにメンション
