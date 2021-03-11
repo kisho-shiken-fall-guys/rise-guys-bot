@@ -1,0 +1,4 @@
+discord.py[voice]>=1.4.1
+quart>=0.14.0
+emoji>=1.2.0
+

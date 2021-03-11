@@ -1,0 +1,23 @@
+{
+  "name": "rise-guys-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec 'heroku local web' -e py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kisho-shiken-fall-guys/rise-guys-bot.git"
+  },
+  "author": "pizzacat83",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kisho-shiken-fall-guys/rise-guys-bot/issues"
+  },
+  "homepage": "https://github.com/kisho-shiken-fall-guys/rise-guys-bot#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

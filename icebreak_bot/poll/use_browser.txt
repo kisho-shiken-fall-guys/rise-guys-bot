@@ -1,0 +1,5 @@
+Chrome
+fireFox
+Edge
+IE
+その他
