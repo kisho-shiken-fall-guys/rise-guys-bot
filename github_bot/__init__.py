@@ -68,8 +68,6 @@ async def push_embed(title, sender_login, commits_info, push_url,
     await channel.send(embed=embed)
 
 
-# ngrokでもできるが、デプロイのほうが楽
-# githubからのjsonはheoku localではなく、デプロイをする必要がある。
 @quart.route('/gh-webhook', methods=['POST'])
 async def webhook():
     # print(request)              # requestにjsonが入っている
@@ -135,18 +133,10 @@ async def on_ready():
 async def on_message(message):
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
-        #         await message.add_reaction(emoji)
         return
-    if message.content == 'github リアクション':
-        await message.channel.send('github リアクションつける')
-#         await message.add_reaction(emoji)
-# チャンネルIDをチェックするため
-    elif message.content == '/test':
+    # チャンネルIDをチェックするため
+    if message.content == '/test':
         await message.channel.send('channelID:' + str(message.channel.id))
-    # /randと発言したらサーバー内のメンバーから誰かにメンション
-    elif message.content == '/rand':
-        members = get_members(message.channel)
-        await message.channel.send(random.choice(members).mention)
 
 
 def get_members(channel):
