@@ -1,6 +1,9 @@
 # インストールした discord.py を読み込む
 import discord
 import random
+import hashlib
+import hmac
+import os
 from quart import Quart, request
 
 quart = Quart(__name__)
@@ -9,15 +12,13 @@ quart = Quart(__name__)
 # 今後は動的にチャンネルを動的に取得する必要がある
 # よくあるのがherokuの環境変数に設定する方法らしい
 # セキュリティ上IDは削除
-CHANNEL_ID =   # 任意のチャンネルID(int)
+CHANNEL_ID = int(os.environ['CHANNEL_ID'])  # 任意のチャンネルID(int)
 # 接続に必要なオブジェクトを生成
 intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
 
 emoji = '\N{Face with Party Horn and Party Hat}'
-
-# 任意のチャンネルで挨拶する非同期関数を定義
 
 
 async def isuue_embed(title, description, login, issue_url, user_url,
@@ -74,9 +75,22 @@ async def push_embed(title, sender_login, commits_info, push_url,
 @quart.route('/gh-webhook', methods=['POST'])
 async def webhook():
     # print(request)              # requestにjsonが入っている
+    channel = client.get_channel(CHANNEL_ID)
     json = await request.get_json()
     header = request.headers
     event_type = header["X-Github-Event"]
+    incomingSignature = header["X-Hub-Signature"].strip()
+    await channel.send(incomingSignature)
+    key = bytes()
+    secretToken = os.environ['SECRET_TOKEN']
+    key = bytes(secretToken, 'utf-8')
+    body = await request.get_data()
+    # sha1の計算
+    hexDigest = hmac.new(key, body, hashlib.sha1).hexdigest()
+    expectedSignature = "sha1=" + hexDigest
+    # signatureが合わなければエラー
+    if(not hmac.compare_digest(incomingSignature, expectedSignature)):
+        return '', 401
     # eventごとに分別
     title = str()
     description = str()
@@ -141,7 +155,7 @@ async def on_message(message):
     if message.content == 'github リアクション':
         await message.channel.send('github リアクションつける')
 #         await message.add_reaction(emoji)
-# チャンネルIDをチェックするため 
+# チャンネルIDをチェックするため
     elif message.content == '/test':
         await message.channel.send('channelID:' + str(message.channel.id))
     # /randと発言したらサーバー内のメンバーから誰かにメンション
