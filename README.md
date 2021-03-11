@@ -1,61 +1,31 @@
-# discordpy-startup
+# rise-guys-bot
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+## Licenses
+[MIT License](./LICENSE)
 
-- Herokuでdiscord.pyを始めるテンプレートです。
-- Use Template からご利用ください。
-- 使い方はこちら： [Discord Bot 最速チュートリアル【Python&Heroku&GitHub】 - Qiita](https://qiita.com/1ntegrale9/items/aa4b373e8895273875a8)
+This software is a modification of [DiscordBotPortalJP/discordpy-startup](https://github.com/DiscordBotPortalJP/discordpy-startup) which is licensed under MIT License.
 
-## 環境構築
-### 依存パッケージインストール
-```
-poetry install
-```
+<details>
+  <summary>License</summary>
+MIT License
 
-### 環境変数設定
-リポジトリ直下に `.env` ファイルを作成し、以下のような内容を記述してください。
+Copyright (c) 2019-2020 Discord Bot Portal JP
 
-```
-DISCORD_BOT_TOKEN=取得したトークン
-```
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## ローカル実行
-```
-poetry shell
-heroku local
-```
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## デプロイ方法
-1. herokuにデプロイ `git push heroku master` 
-2. デプロイ先のURL取得 `heroku info -s` など `heroku open` でも可能
-3. 対象のgithubレポジトリで settings -> Webhooks -> Add Webhook を選択
-4. デプロイ先のURL、送信の形式(JSON)、全てのイベントの通知を設定
-
-## 各種ファイル情報
-
-### discordbot.py
-PythonによるDiscordBotのアプリケーションファイルです。
-
-### requirements.txt
-使用しているPythonのライブラリ情報の設定ファイルです。
-
-### Procfile
-Herokuでのプロセス実行コマンドの設定ファイルです。
-
-### runtime.txt
-Herokuでの実行環境の設定ファイルです。
-
-### app.json
-Herokuデプロイボタンの設定ファイルです。
-
-### .github/workflows/flake8.yaml
-GitHub Actions による自動構文チェックの設定ファイルです。
-
-### .gitignore
-Git管理が不要なファイル/ディレクトリの設定ファイルです。
-
-### LICENSE
-このリポジトリのコードの権利情報です。MITライセンスの範囲でご自由にご利用ください。
-
-### README.md
-このドキュメントです。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</details>
