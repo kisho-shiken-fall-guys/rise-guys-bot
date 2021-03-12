@@ -1,14 +1,15 @@
 # インストールした discord.py を読み込む
-import discord
-from discord import Message, Member, User, Reaction
+import asyncio
 import re
 from typing import List, Union, NamedTuple, Optional
-import asyncio
+import discord
+from discord import Message, Member, User, Reaction
 from emoji import emojize
-from .handlers import handlers
+from .handlers import handler
+from .client import client
 
 # 接続に必要なオブジェクトを生成
-client = discord.Client()
+
 # 起動時に動作する処理
 @client.event
 async def on_ready():
@@ -24,10 +25,10 @@ async def on_message(message: Message):
     if message.author.bot:
         return
     if client.user in message.mentions: # 話しかけられたかの判定
-        await asyncio.gather(*[handler(message) for handler in handlers.on_mention])
+        await handler.handle_mention(message)
 
 @client.event
 async def on_reaction_add(reaction: Reaction, user: Union[Member, User]):
     if user.bot:
         return
-    await asyncio.gather(*[handler(reaction, user) for handler in handlers.on_reaction_add])
+    await handler.handle_reaction_add(reaction, user)
