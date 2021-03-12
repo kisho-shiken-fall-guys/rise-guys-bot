@@ -77,7 +77,7 @@ async def webhook():
     json = await request.get_json()
     header = request.headers
     event_type = header["X-Github-Event"]
-    incomingSignature = header["X-Hub-Signature"].strip(
+    incomingSignature = header["X-Hub-Signature"].strip()
     key = bytes()
     secretToken = os.environ['SECRET_TOKEN']
     key = bytes(secretToken, 'utf-8')
