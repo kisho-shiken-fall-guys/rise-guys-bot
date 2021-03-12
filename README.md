@@ -1,5 +1,39 @@
 # rise-guys-bot
 
+## Setup
+
+1. Discord botの作成
+
+2. Herokuへのデプロイ
+
+3. tokenの設定
+
+~~~
+heroku config:set DISCORD_BOT_TOKEN=hogehoge
+~~~
+
+4. Discord botをサーバーに招待して、通知してほしいchannelで'/test'と打ち込んでください
+
+5. 出てきたchannel idを以下のように設定
+
+~~~
+heroku config:set CHANNEL_ID=hogehoge
+~~~
+
+6. GitHubのWebhookにHerokuのURL+'/gh-webhook'を設定
+
+ex. https://hogehoge.herokuapp.com/gh-webhook
+
+
+7. WebhookのSECRET欄に```ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'```などで生成した乱数を設定
+
+8. 同じ乱数を設定
+
+~~~
+heroku config:set SECRET_TOKEN=hogehoge
+~~~
+
+
 ## Licenses
 [MIT License](./LICENSE)
 
