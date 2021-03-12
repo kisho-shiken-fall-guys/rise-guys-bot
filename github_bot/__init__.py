@@ -1,6 +1,7 @@
 # インストールした discord.py を読み込む
 import discord
 import random
+import os
 from quart import Quart, request
 
 quart = Quart(__name__)
@@ -9,15 +10,13 @@ quart = Quart(__name__)
 # 今後は動的にチャンネルを動的に取得する必要がある
 # よくあるのがherokuの環境変数に設定する方法らしい
 # セキュリティ上IDは削除
-CHANNEL_ID =   # 任意のチャンネルID(int)
+CHANNEL_ID = int(os.environ['CHANNEL_ID'])  # 任意のチャンネルID(int)
 # 接続に必要なオブジェクトを生成
 intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
 
 emoji = '\N{Face with Party Horn and Party Hat}'
-
-# 任意のチャンネルで挨拶する非同期関数を定義
 
 
 async def isuue_embed(title, description, login, issue_url, user_url,
@@ -27,7 +26,7 @@ async def isuue_embed(title, description, login, issue_url, user_url,
     embed = discord.Embed(
         title=title,
         description=description +
-        "\nやってくれるね？" +
+        "\n\nやってくれるね？" +
         random.choice(members).mention,
         url=issue_url)
     # ここ以降にフォーマットの改変を記載
@@ -69,8 +68,6 @@ async def push_embed(title, sender_login, commits_info, push_url,
     await channel.send(embed=embed)
 
 
-# ngrokでもできるが、デプロイのほうが楽
-# githubからのjsonはheoku localではなく、デプロイをする必要がある。
 @quart.route('/gh-webhook', methods=['POST'])
 async def webhook():
     # print(request)              # requestにjsonが入っている
@@ -136,18 +133,10 @@ async def on_ready():
 async def on_message(message):
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
-        #         await message.add_reaction(emoji)
         return
-    if message.content == 'github リアクション':
-        await message.channel.send('github リアクションつける')
-#         await message.add_reaction(emoji)
-# チャンネルIDをチェックするため 
-    elif message.content == '/test':
+    # チャンネルIDをチェックするため
+    if message.content == '/test':
         await message.channel.send('channelID:' + str(message.channel.id))
-    # /randと発言したらサーバー内のメンバーから誰かにメンション
-    elif message.content == '/rand':
-        members = get_members(message.channel)
-        await message.channel.send(random.choice(members).mention)
 
 
 def get_members(channel):
