@@ -20,9 +20,9 @@ class StandByState(ChannelState):
 
     async def on_mention(self, message: Message) -> Optional[ChannelState]:
         text = remove_mention(message)
-        if re.match('^(お題ください|genre)$', text):
+        if re.match('^(お題ください|poll)$', text):
             return await GenreSelectionState.create(self.context)
-        if re.match('^(お題追加|genre add)$', text):
+        if re.match('^(選択肢追加|poll add)$', text):
             return await GenreSelectionForAddState.create(self.context)
         return None
 
