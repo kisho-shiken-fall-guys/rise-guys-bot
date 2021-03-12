@@ -1,6 +1,8 @@
 # インストールした discord.py を読み込む
 import discord
 import random
+import hashlib
+import hmac
 import os
 from quart import Quart, request
 
@@ -71,9 +73,22 @@ async def push_embed(title, sender_login, commits_info, push_url,
 @quart.route('/gh-webhook', methods=['POST'])
 async def webhook():
     # print(request)              # requestにjsonが入っている
+    channel = client.get_channel(CHANNEL_ID)
     json = await request.get_json()
     header = request.headers
     event_type = header["X-Github-Event"]
+    incomingSignature = header["X-Hub-Signature"].strip()
+    await channel.send(incomingSignature)
+    key = bytes()
+    secretToken = os.environ['SECRET_TOKEN']
+    key = bytes(secretToken, 'utf-8')
+    body = await request.get_data()
+    # sha1の計算
+    hexDigest = hmac.new(key, body, hashlib.sha1).hexdigest()
+    expectedSignature = "sha1=" + hexDigest
+    # signatureが合わなければエラー
+    if(not hmac.compare_digest(incomingSignature, expectedSignature)):
+        return '', 401
     # eventごとに分別
     title = str()
     description = str()
@@ -134,6 +149,7 @@ async def on_message(message):
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
         return
+
     # チャンネルIDをチェックするため
     if message.content == '/test':
         await message.channel.send('channelID:' + str(message.channel.id))
