@@ -55,7 +55,7 @@ class SelectionState(ChannelState, abc.ABC, Generic[Value]):
         """
         reaction_add イベントを受け取り，選択肢に対するリアクションであれば on_selection を呼び出して選択の終了を伝える
         """
-        if reaction.message.id == self.message.id:
+        if reaction.message == self.message:
             # 選択肢メッセージへのリアクション
             if reaction.emoji in number_emojis:
                 index = number_emojis.index(reaction.emoji)

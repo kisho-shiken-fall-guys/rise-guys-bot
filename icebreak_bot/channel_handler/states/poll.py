@@ -80,7 +80,7 @@ class PollStateBase(ChannelState, abc.ABC, Generic[Value]):
         """
         reaction_add イベントを受け取り，投票終了リアクションであれば on_close を呼び出して投票の終了を伝える
         """
-        if reaction.message.id != self.message.id:
+        if reaction.message != self.message:
             return None
         if reaction.emoji != poll_close_emoji:
             return None
