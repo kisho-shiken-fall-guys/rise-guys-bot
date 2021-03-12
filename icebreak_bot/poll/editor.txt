@@ -1,5 +1,6 @@
 Vim
 emacs
-vscode
+VS Code
 Atom
+GNU nano
 その他
