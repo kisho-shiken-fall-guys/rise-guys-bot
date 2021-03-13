@@ -1,0 +1,14 @@
+[
+  {
+    "id": "chat",
+    "name": "雑談・一般的な質問"
+  },
+  {
+    "id": "religious_war",
+    "name": "宗教戦争"
+  },
+  {
+    "id": "technology",
+    "name": "技術系"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "hobby",
+    "genre_id": "chat",
+    "name": "趣味について",
+    "filename": "hobby"
+  },
+  {
+    "id": "happiness_recent",
+    "genre_id": "chat",
+    "name": "最近買ってよかったもの",
+    "filename": "happiness_recent"
+  },
+  {
+    "id": "sad_recent",
+    "genre_id": "chat",
+    "name": "最近あった楽しいこと",
+    "filename": "sad_recent"
+  },
+  {
+    "id": "like_food",
+    "genre_id": "chat",
+    "name": "好きな食べ物",
+    "filename": "like_food"
+  },
+  {
+    "id": "live_in",
+    "genre_id": "chat",
+    "name": "住んでいる地域",
+    "filename": "live_in"
+  },
+  {
+    "id": "editor",
+    "genre_id": "religious_war",
+    "name": "好きなエディタ",
+    "filename": "editor"
+  },
+  {
+    "id": "tab_or_space",
+    "genre_id": "religious_war",
+    "name": "tab vs space",
+    "filename": "tab_or_space"
+  },
+  {
+    "id": "use_browser",
+    "genre_id": "religious_war",
+    "name": "使ってるブラウザ",
+    "filename": "use_browser"
+  },
+  {
+    "id": "Linux_distribution",
+    "genre_id": "religious_war",
+    "name": "Linuxのディストリビューション",
+    "filename": "Linux_distribution"
+  },
+  {
+    "id": "zero_trouble",
+    "genre_id": "religious_war",
+    "name": "自然数にゼロを含めるか？",
+    "filename": "zero_trouble"
+  },
+  {
+    "id": "like_os",
+    "genre_id": "religious_war",
+    "name": "好きなOSは？",
+    "filename": "like_os"
+  },
+  {
+    "id": "like_programming_language",
+    "genre_id": "technology",
+    "name": "好きなプログラミング言語は？",
+    "filename": "like_programming_language"
+  },
+  {
+    "id": "interesting_lecture",
+    "genre_id": "technology",
+    "name": "読みたい/読んだおススメの技術書は？",
+    "filename": "interesting_lecture"
+  },
+  {
+    "id": "from_course",
+    "genre_id": "technology",
+    "name": "セキュリティキャンプはどのコース出身？",
+    "filename": "from_course"
+  }
+]
